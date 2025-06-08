@@ -3,126 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title> <link rel="stylesheet" href="styles.css">
+    <title></title> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
-
     <nav class="nav" id="navbar">
         <div class="container">
             <div class="nav-content">
                 <a href="#" id="logo" class="logo"></a>
                 <div class="nav-links" id="nav-links"></div>
                 <button class="burger-menu" id="burgerMenu" aria-label="Открыть меню">
-                    <span class="burger-line"></span>
-                    <span class="burger-line"></span>
-                    <span class="burger-line"></span>
+                    <span class="material-symbols-outlined">menu</span>
                 </button>
             </div>
         </div>
     </nav>
 
-    <section class="hero" id="hero">
-        <div class="container">
+    <header class="hero" id="hero">
+        <div class="container hero-grid">
             <div class="hero-content">
                 <h1 id="hero-title"></h1>
                 <p id="hero-subtitle"></p>
-                <a href="#final-cta" id="hero-cta" class="cta-button"></a>
+                <a href="#pricing" id="hero-cta" class="cta-button register-trigger"></a>
+            </div>
+            <div class="hero-image-container">
+                <img src="/img/hero-image.png" alt="Hero Image" class="hero-image">
             </div>
         </div>
-    </section>
+    </header>
 
-    <section class="problems" id="problems">
-        <div class="container">
-            <h2 id="problems-title"></h2>
-            <div class="problems-grid" id="problems-grid"></div>
-        </div>
-    </section>
-
-    <section class="solution" id="solution">
-        <div class="container">
-            <h2 id="solution-title"></h2>
-            <p id="solution-p1"></p>
-            <p id="solution-p2"></p>
-        </div>
-    </section>
-
-    <section class="process" id="process">
-        <div class="container">
-            <h2 id="process-title"></h2>
-            <div class="process-timeline" id="process-timeline"></div>
-        </div>
-    </section>
-    
-    <section class="results" id="results">
-        <div class="container">
-            <h2 id="results-title"></h2>
-            <div class="results-grid" id="results-grid"></div>
-        </div>
-    </section>
-
-    <section class="about-author" id="author">
-        <div class="container">
-            <div class="author-content">
-                <div class="author-image" id="author-image-container"></div>
-                <div class="author-text">
-                    <h2 id="author-title"></h2>
-                    <p id="author-p1"></p>
-                    <p id="author-p2"></p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="bonuses" id="bonuses">
-        <div class="container">
-            <h2 id="bonuses-title"></h2>
-            <div class="bonuses-grid" id="bonuses-grid"></div>
-        </div>
-    </section>
-
-    <section class="testimonials" id="testimonials">
-    <div class="container">
-        <h2 id="testimonials-title"></h2>
-        <div class="testimonials-grid" id="testimonials-grid"></div>
-    </div>
-    </section>
-
-    <section class="pricing" id="pricing">
-        <div class="container">
-            <h2 id="pricing-title"></h2>
-            <div class="pricing-grid" id="pricing-grid">
-                </div>
-        </div>
-    </section>
-
-    <section class="ai-faq" id="faq">
-        <div class="container">
-            <h2 id="faq-title"></h2>
-            <div class="chat-container glass-card" id="chat-container">
-                <div class="chat-messages" id="chat-messages">
+    <main>
+        <section class="problems" id="problems">
+            <div class="container">
+                <h2 id="problems-title"></h2>
+                <div class="problems-grid" id="problems-grid">
                     </div>
-                <div class="chat-input-area">
-                    <input type="text" id="chat-input" placeholder="Спросите что-нибудь о курсе...">
-                    <button id="chat-send-btn" aria-label="Отправить">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" /></svg>
-                    </button>
+            </div>
+        </section>
+
+        <section class="solution" id="solution">
+            <div class="container">
+                <div class="solution-content">
+                    <div class="solution-text">
+                        <h2 id="solution-title" style="text-align: left;"></h2>
+                        <p id="solution-text-p"></p>
+                        <div class="solution-features" id="solution-features"></div>
+                    </div>
+                    <div class="solution-image">
+                        <img src="img/solution-img.png" alt="Solution Image">
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-    
-    <section class="final-cta" id="final-cta">
+        </section>
+        
+        <section class="process" id="process">
+            <div class="container">
+                <h2 id="process-title"></h2>
+                <div class="process-steps" id="process-steps">
+                    </div>
+            </div>
+        </section>
+
+        <section class="author" id="author">
+            <div class="container author-content">
+                <div class="author-image">
+                    <img id="author-image-src" src="img/author-img.png" alt="Фото автора курса">
+                </div>
+                <div class="author-text">
+                    <h2 id="author-title" style="text-align: left;"></h2>
+                    <h3 id="author-name"></h3>
+                    <p id="author-bio"></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials" id="testimonials">
+            <div class="container">
+                <h2 id="testimonials-title"></h2>
+                <div class="testimonials-grid" id="testimonials-grid">
+                    </div>
+            </div>
+        </section>
+
+        <section class="pricing" id="pricing">
+            <div class="container">
+                <h2 id="pricing-title"></h2>
+                <div class="pricing-grid" id="pricing-grid"></div>
+            </div>
+        </section>
+        
+        <section class="faq" id="faq-section">
+            <div class="container">
+                <h2 id="faq-title"></h2>
+                <div class="faq-container" id="faq-container"></div>
+            </div>
+        </section>
+
+        <section class="final-cta" id="final-cta">
+             <div class="container final-cta-content">
+                <h2 id="final-cta-title"></h2>
+                <p id="final-cta-subtitle"></p>
+                <a href="#pricing" id="final-cta-button" class="cta-button register-trigger"></a>
+            </div>
+        </section>
+    </main>
+
+    <footer id="footer">
         <div class="container">
-            <h2 id="final-cta-title"></h2>
-            <p id="final-cta-subtitle"></p>
-            <a href="#" id="final-cta-button" class="cta-button"></a>
+            <p id="footer-text"></p>
         </div>
-    </section>
+    </footer>
 
-    <footer id="footer"></footer>
+    <div class="rocky-fab" id="rocky-chat">
+        <div class="rocky-chat-window">
+            <div class="chat-header">
+                <div class="chat-header-title">Роки-ассистент</div>
+            </div>
+            <div class="chat-messages" id="chat-messages"></div>
+            <form class="chat-input-area" id="chat-form">
+                <input type="text" id="chat-input" placeholder="Спросите что-нибудь...">
+                <button id="chat-send-btn" type="submit" aria-label="Отправить">
+                    <span class="material-symbols-outlined">send</span>
+                </button>
+            </form>
+        </div>
+        <button class="rocky-chat-button" id="rocky-chat-toggle" aria-label="Открыть чат">
+            <span class="material-symbols-outlined icon-open">chat</span>
+            <span class="material-symbols-outlined icon-close">close</span>
+        </button>
+    </div>
 
+    <div class="modal" id="registration-modal">
+        <div class="modal-content">
+            <button class="modal-close-btn" id="modal-close-btn">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            
+            <div class="iframe-container">
+                <iframe 
+                    src="https://docs.google.com/forms/d/e/1FAIpQLSfOg_1rAk_jKlx8AyekjBg-cCO_o3KVdRzz0EIpPCp-OQbu6A/viewform?embedded=true" 
+                    frameborder="0">
+                    Загрузка…
+                </iframe>
+            </div>
+        </div>
+    </div>
+    
     <script src="script.js"></script>
 </body>
 </html>
