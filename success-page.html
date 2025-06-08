@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заявка отправлена!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css"> 
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-secondary); /* Используем фоновый цвет из ваших переменных */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 32px; /* Общие отступы по краям */
+            box-sizing: border-box;
+        }
+
+        .success-container {
+            background-color: var(--bg-light); /* Светлый фон для контейнера */
+            border-radius: 16px; /* Закругленные углы */
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1); /* Тень */
+            padding: 48px 32px; /* Внутренние отступы */
+            text-align: center;
+            max-width: 600px; /* Максимальная ширина контейнера */
+            width: 100%;
+        }
+
+        .success-container h1 {
+            font-size: clamp(2rem, 3.5vw, 3rem); /* Адаптивный размер заголовка */
+            color: var(--primary-blue); /* Цвет заголовка из ваших переменных */
+            margin-bottom: 24px; /* Отступ под заголовком */
+        }
+
+        .success-container p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 32px; /* Отступ под текстом */
+        }
+
+        .success-container .cta-button {
+            /* Используем стили вашей основной кнопки, возможно, потребуется переопределить ширину */
+            width: auto; /* Кнопка по ширине содержимого */
+            padding: 16px 48px; /* Немного шире, чем стандартный cta-button */
+            text-decoration: none; /* Убираем подчеркивание */
+        }
+
+        @media (max-width: 768px) {
+            .success-container {
+                padding: 32px 24px; /* Уменьшаем отступы на мобильных */
+            }
+            .success-container h1 {
+                margin-bottom: 16px;
+            }
+            .success-container p {
+                margin-bottom: 24px;
+            }
+            .success-container .cta-button {
+                width: 100%; /* На мобильных кнопка может быть на всю ширину */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <h1>🎉 Заявка успешно отправлена! 🎉</h1>
+        <p>Мы получили ваши данные и свяжемся с вами в ближайшее время для уточнения деталей.</p>
+        <p>Для оплаты доступа к курсу и завершения регистрации, пожалуйста, нажмите кнопку ниже:</p>
+        <a href="https://web.tribute.tg/s/vFt" class="cta-button">Оплатить доступ</a>
+    </div>
+</body>
+</html>
