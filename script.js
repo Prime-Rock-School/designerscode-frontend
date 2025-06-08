@@ -332,7 +332,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const messagesContainer = document.getElementById('chat-messages');
 
     // !!! ВАЖНО: ЗАМЕНИТЕ ЭТОТ URL НА ВАШ РЕАЛЬНЫЙ URL С RENDER.COM !!!
-    const BACKEND_URL = 'https://oracle-backend-xxxx.onrender.com/api/ask-oracle';
+    const BACKEND_URL = 'https://designerscode-oracle-backend.onrender.com';
 
     // Функция для добавления нового сообщения в чат
     function addMessage(text, sender) {
