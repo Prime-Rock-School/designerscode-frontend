@@ -95,14 +95,13 @@ section:nth-child(even) {
 }
 .nav-content { display: flex; justify-content: space-between; align-items: center; }
 .logo { font-size: 1.5rem; font-weight: 700; text-decoration: none; color: var(--text-dark); }
-.nav-links { display: flex; gap: 2.5rem; /* 32px */ }
+.nav-links { display: flex; gap: 32px; /* 32px */ }
 .nav-links a { text-decoration: none; color: var(--text-secondary); font-weight: 500; transition: color 0.3s ease; }
 .nav-links a:hover { color: var(--primary-blue); }
 .burger-menu { display: none; background: transparent; border: none; cursor: pointer; color: var(--text-dark); }
 
 
 /* Hero Section */
-/* Стало */
 .hero {
     min-height: 100vh; /* Занимаем всю высоту видимой области */
     display: flex;
@@ -111,7 +110,7 @@ section:nth-child(even) {
     padding-top: 96px; /* Добавляем отступ сверху, равный высоте шапки */
 }
 #hero-title { font-size: clamp(2.5rem, 4vw, 3.5rem); line-height: 3.8rem; margin-bottom: 16px; /* 16px */ }
-.hero-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: .2rem; /* 48px */ }
+.hero-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 48px; /* 48px */ }
 .hero-content p { font-size: 1.1rem; max-width: 500px; }
 .hero-image-container { text-align: center; }
 .hero-image { max-width: 100%; border-radius: 16px; /* 16px */ }
@@ -131,10 +130,10 @@ section:nth-child(even) {
 .problem-card h3 { font-size: 1.25rem; }
 
 /* Solution Section */
-.solution-content { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; /* 64px */ align-items: center; }
+.solution-content { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; /* 64px */ align-items: center; }
 #solution-title { margin-bottom: 12px; /* Уменьшаем стандартный отступ секции в 64px */}
 #solution-text-p { text-align: left;}
-.solution-features { margin-top: 32px; display: flex; flex-direction: column; gap: 8px; /* 12px */ }
+.solution-features { margin-top: 32px; display: flex; flex-direction: column; gap: 12px; /* 12px */ }
 .feature-item { display: flex; align-items: flex-start; gap: 16px; text-align: left;}
 .feature-item h4 { margin-bottom: 8px;}
 .feature-item .icon { font-size: 1.8rem; color: var(--primary-blue); }
@@ -162,7 +161,7 @@ section:nth-child(even) {
 .process-step p { color: var(--text-secondary); }
 
 /* Author Section */
-.author-content { display: grid; grid-template-columns: .8fr 1fr; gap: 2rem; /* 48px */ align-items: center; }
+.author-content { display: grid; grid-template-columns: .8fr 1fr; gap: 48px; /* 48px */ align-items: center; }
 #author-title { margin-bottom: 1.5rem; /* 16px */ }
 .author-image img { width: 100%; border-radius: 16px; /* 16px */ }
 
@@ -193,7 +192,7 @@ section:nth-child(even) {
 .faq-item.active .faq-arrow { transform: rotate(180deg); }
 
 /* Final CTA Section */
-.final-cta-content { text-align: center; padding: 2rem; /* 64px 32px */ background-color: var(--primary-blue); border-radius: 24px; /* 24px */ color: var(--bg-light); }
+.final-cta-content { text-align: center; padding: 64px 32px; /* 64px 32px */ background-color: var(--primary-blue); border-radius: 24px; /* 24px */ color: var(--bg-light); }
 .final-cta-content h2 { color: var(--bg-light); margin: 0 0 1rem 0; }
 .final-cta-content p { color: rgba(255, 255, 255, 0.8); margin: 0rem 0rem 2rem 0rem;}
 .final-cta-content .cta-button { background-color: var(--bg-light); color: var(--primary-blue); }
@@ -206,7 +205,7 @@ footer {
     border-top: 1px solid var(--border-color);
 }
 
-/* --- 3. Light theme for UI elements --- */
+/* --- 3. UI Elements: Rocky Chat & Modal Window --- */
 
 /* Rocky Chat */
 .rocky-fab { position: fixed; bottom: 32px; right: 32px; z-index: 1001; }
@@ -226,8 +225,7 @@ footer {
 #chat-input { flex-grow: 1; border: none; padding: 12px; /* 12px */ background: transparent; outline: none; }
 #chat-send-btn { display: flex; align-items: center; justify-content: center; width: 48px; /* 48px */ height: 48px; /* 48px */ border: none; background: transparent; color: var(--primary-blue); cursor: pointer; }
 
-/* Modal Window */
-/* --- Modal Window (New Iframe Version) --- */
+/* Modal Window (Desktop & Mobile combined) */
 .modal {
     position: fixed;
     top: 0;
@@ -256,18 +254,18 @@ footer {
     width: 90%;
     max-width: 680px; /* Ширина для десктопа */
     height: 90vh; /* Высота для десктопа */
-    max-height: 750px;
+    max-height: 750px; /* Максимальная высота для десктопа */
     position: relative;
     box-shadow: 0 16px 48px rgba(0,0,0,0.2);
     overflow: hidden; /* Скрываем все, что выходит за скругленные углы */
     
-    /* Анимация появления */
+    /* Анимация появления для десктопа */
     transform: scale(0.95);
     transition: transform 0.3s ease;
 }
 
 .modal.modal--open .modal-content {
-    transform: scale(1);
+    transform: scale(1); /* Для десктопа */
 }
 
 .modal-close-btn {
@@ -292,15 +290,84 @@ footer {
     background: rgba(255, 255, 255, 1);
 }
 
-.iframe-container {
-    width: 100%;
-    height: 100%;
+/* Custom Form Styles within Modal */
+.modal-content .form-container {
+    padding: 32px; /* 32px отступы внутри контейнера формы */
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Занимаем всю доступную высоту модального контента */
+    justify-content: center; /* Центрируем содержимое по вертикали */
 }
 
-.iframe-container iframe {
+.modal-content .form-container h2 {
+    font-size: 2rem; /* Размер заголовка формы */
+    color: var(--text-dark);
+    margin-bottom: 16px; /* 16px */
+    text-align: center;
+}
+
+.modal-content .form-container p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 24px; /* 24px */
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 16px; /* 16px отступ между группами полей */
+}
+
+.form-group label {
+    display: block; /* Каждая метка на новой строке */
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    margin-bottom: 8px; /* 8px */
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"] {
     width: 100%;
-    height: 100%;
-    border: none;
+    padding: 12px 16px; /* 12px сверху/снизу, 16px слева/справа */
+    border: 1px solid var(--border-color);
+    border-radius: 8px; /* 8px */
+    font-size: 1rem;
+    color: var(--text-dark);
+    background-color: var(--bg-light);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="tel"]:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(39, 133, 255, 0.2);
+}
+
+.form-group input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+/* Стили для кнопки отправки внутри формы (если это CTA Button) */
+.modal-content .cta-button {
+    width: 100%; /* Кнопка занимает всю ширину */
+    margin-top: 24px; /* 24px отступ сверху */
+    padding: 16px 32px; /* Сохраняем стиль основной кнопки */
+    font-size: 1.1rem;
+}
+
+/* Скрытое поле для Netlify Honeypot */
+.hidden {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    width: 0 !important;
+    position: absolute !important;
+    overflow: hidden !important;
 }
 
 /* --- 5. Адаптивность --- */
@@ -322,23 +389,21 @@ footer {
     .nav-links.nav-links--open {
         display: flex; /* Показываем ссылки */
         flex-direction: column;
-        gap: 0rem; /* 8px */
+        gap: 0px; /* 8px, если нужно расстояние между пунктами */
         position: absolute;
-        top: 5rem; /* Отступаем от шапки */
+        top: 80px; /* Отступаем от шапки (24px padding nav + 24px padding nav + 32px height button) */
         left: 0;
         width: 100%;
         background-color: var(--bg-light); /* Или цвет шапки */
         box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-        padding: .5rem 2rem;
-        padding-top: 0;
-        margin-top: 0;
+        padding: 0 32px; /* 0 сверху/снизу, 32px слева/справа */
         border-bottom-left-radius: 16px;
         border-bottom-right-radius: 16px;
         overflow: hidden; /* Важно для скрытия элементов за пределами контейнера */
     }
 
     .nav-links.nav-links--open a {
-        padding: 1rem 0;
+        padding: 16px 0; /* Убираем верхний отступ, оставляя нижний для разделения */
         text-align: center;
         width: 100%;
         border-bottom: 1px solid var(--border-color);
@@ -367,6 +432,7 @@ footer {
         opacity: 1; /* Показываем пункт */
         transform: translateY(0); /* Возвращаем на место */
     }
+
     .process-steps { grid-template-columns: 1fr; gap: 48px; /* 48px */ padding-left: 16px; /* 16px */ border-left: 2px solid var(--border-color); }
     .process-steps::before { display: none; }
     .process-step { padding-left: 32px; /* 32px */ }
@@ -416,25 +482,33 @@ footer {
         /* 7. Указываем, что каждая карточка является точкой "прилипания" */
         scroll-snap-align: start;
     }
+
+    /* МОДАЛЬНОЕ ОКНО: АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ (ВЫЕЗЖАЕТ СНИЗУ) */
     .modal-content {
-        /* Переопределяем стили для мобильной версии */
         position: fixed;
         bottom: 0;
         left: 0;
         right: 0;
-        width: 100%;
-        height: 85vh; /* Занимает 85% высоты экрана */
-        max-height: 90vh;
-        max-width: 100%;
+        width: 100%; /* Занимает всю ширину */
+        height: auto; /* Высота по содержимому */
+        max-height: 90vh; /* Максимальная высота 90% от высоты viewport */
+        max-width: 100%; /* Занимает всю ширину */
         border-radius: 24px 24px 0 0; /* Скругляем только верхние углы */
 
-        /* Начальное состояние (панель скрыта внизу) */
+        /* Начальное состояние: форма скрыта внизу */
         transform: translateY(100%);
+        /* Плавная анимация выезда */
         transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 -8px 24px rgba(0,0,0,0.2); /* Тень сверху для эффекта выезда */
     }
 
     .modal.modal--open .modal-content {
-        /* Конечное состояние (панель выехала) */
+        /* Конечное состояние: форма выехала на экран */
         transform: translateY(0);
+    }
+
+    /* Адаптация формы внутри модального окна на мобильных */
+    .modal-content .form-container {
+        padding: 24px; /* 24px уменьшаем отступы на мобильных */
     }
 }

@@ -233,7 +233,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (modal) modal.classList.remove('modal--open');
         }
 
-        // Эта логика остается, она открывает и закрывает наше окно
         registerTriggers.forEach(btn => btn.addEventListener('click', (e) => {
             e.preventDefault();
             openModal();
@@ -245,7 +244,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if(modal) {
             modal.addEventListener('click', (e) => {
-                if (e.target === modal) closeModal();
+                // Закрывать модальное окно только если клик был вне modal-content
+                if (e.target === modal) closeModal(); 
             });
         }
     }

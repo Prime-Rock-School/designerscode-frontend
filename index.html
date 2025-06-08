@@ -143,14 +143,34 @@
                 <span class="material-symbols-outlined">close</span>
             </button>
             
-            <div class="iframe-container">
-                <iframe 
-                    src="https://docs.google.com/forms/d/e/1FAIpQLSfOg_1rAk_jKlx8AyekjBg-cCO_o3KVdRzz0EIpPCp-OQbu6A/viewform?embedded=true" 
-                    frameborder="0">
-                    Загрузка…
-                </iframe>
+            <div class="form-container">
+                <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                    <p class="hidden">
+                      <label>Не заполнять: <input name="bot-field" /></label>
+                    </p>
+
+                    <input type="hidden" name="form-name" value="contact" />
+                    <input type="hidden" name="netlify-redirect" value="/success-page" /> 
+                    <h2>Запишитесь на курс</h2>
+                    <p>Оставьте свои данные, и мы свяжемся с вами для уточнения деталей.</p>
+
+                    <div class="form-group">
+                        <label for="fullName">Ваше имя:</label>
+                        <input type="text" id="fullName" name="Имя" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="userEmail">Ваш Email:</label>
+                        <input type="email" id="userEmail" name="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="userPhone">Ваш телефон:</label>
+                        <input type="tel" id="userPhone" name="Телефон">
+                    </div>
+                    
+                    <button type="submit" class="cta-button">Записаться</button>
+                </form>
             </div>
-        </div>
+            </div>
     </div>
     
     <script src="script.js"></script>
