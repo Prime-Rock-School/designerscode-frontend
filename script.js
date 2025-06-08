@@ -4,7 +4,6 @@
 
 document.addEventListener('DOMContentLoaded', function() {
 
-    const GOOGLE_FORM_URL = 'ВАША_ССЫЛКА_НА_GOOGLE_FORM_ACTION';
     const TELEGRAM_REDIRECT_URL = 'https://web.tribute.tg/s/vFt';
 
     // -----------------------------------------------------------------
