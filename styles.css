@@ -95,7 +95,7 @@ section:nth-child(even) {
 }
 .nav-content { display: flex; justify-content: space-between; align-items: center; }
 .logo { font-size: 1.5rem; font-weight: 700; text-decoration: none; color: var(--text-dark); }
-.nav-links { display: flex; gap: 32px; /* 32px */ }
+.nav-links { display: flex; gap: 2.5rem; /* 32px */ }
 .nav-links a { text-decoration: none; color: var(--text-secondary); font-weight: 500; transition: color 0.3s ease; }
 .nav-links a:hover { color: var(--primary-blue); }
 .burger-menu { display: none; background: transparent; border: none; cursor: pointer; color: var(--text-dark); }
@@ -318,6 +318,55 @@ footer {
 @media (max-width: 768px) {
     .nav-links { display: none; }
     .burger-menu { display: block; }
+    /* Контейнер меню при открытии */
+    .nav-links.nav-links--open {
+        display: flex; /* Показываем ссылки */
+        flex-direction: column;
+        gap: 0rem; /* 8px */
+        position: absolute;
+        top: 5rem; /* Отступаем от шапки */
+        left: 0;
+        width: 100%;
+        background-color: var(--bg-light); /* Или цвет шапки */
+        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        padding: .5rem 2rem;
+        padding-top: 0;
+        margin-top: 0;
+        border-bottom-left-radius: 16px;
+        border-bottom-right-radius: 16px;
+        overflow: hidden; /* Важно для скрытия элементов за пределами контейнера */
+    }
+
+    .nav-links.nav-links--open a {
+        padding: 1rem 0;
+        text-align: center;
+        width: 100%;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .nav-links.nav-links--open a:last-child {
+        border-bottom: none;
+    }
+
+    /* Дополнительные стили для навигации, когда меню открыто, если нужно */
+    .nav.nav--open {
+        background-color: var(--bg-light); /* Делаем фон сплошным, если был прозрачный */
+        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+
+    /* Стили для отдельных пунктов меню, которые будут анимироваться */
+    .nav-links a {
+        opacity: 0; /* Изначально скрываем пункты меню */
+        transform: translateY(-20px); /* Изначально смещаем вверх */
+        /* Плавный переход для opacity и transform, общая продолжительность */
+        transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    }
+
+    /* Активация анимации для пунктов меню при добавлении класса 'animated' */
+    .nav-links a.animated {
+        opacity: 1; /* Показываем пункт */
+        transform: translateY(0); /* Возвращаем на место */
+    }
     .process-steps { grid-template-columns: 1fr; gap: 48px; /* 48px */ padding-left: 16px; /* 16px */ border-left: 2px solid var(--border-color); }
     .process-steps::before { display: none; }
     .process-step { padding-left: 32px; /* 32px */ }

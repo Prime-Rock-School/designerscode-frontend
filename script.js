@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         setContent('#footer-text', `© ${new Date().getFullYear()} ${data.logoText}. Все права защищены.`);
 
-        initializeDynamicElements();
+        initializeDynamicElements(); // <-- ЭТОТ ВЫЗОВ ОСТАВЛЯЕМ
     }
 
     fetch('content.json')
@@ -193,8 +193,33 @@ document.addEventListener('DOMContentLoaded', function() {
         chatForm.addEventListener('submit', handleSend);
         setTimeout(() => addMessage('Здравствуйте! Я — Роки. Чем могу помочь?', 'bot'), 1000);
 
-        // --- Логика модального окна регистрации ---
-        function initializeDynamicElements() {
+        // --- Логика бургерного меню ---
+        const burgerMenuButton = document.getElementById('burgerMenu');
+        const navLinks = document.getElementById('nav-links');
+        const navBar = document.getElementById('navbar'); // Получаем основной навигационный блок
+        const navItems = navLinks.querySelectorAll('a'); // Получаем все ссылки внутри меню
+
+        if (burgerMenuButton && navLinks && navBar) {
+            burgerMenuButton.addEventListener('click', () => {
+                navLinks.classList.toggle('nav-links--open'); // Переключаем класс для показа/скрытия контейнера ссылок
+                navBar.classList.toggle('nav--open'); // Переключаем класс для изменения стилей навигации (например, для фона)
+
+                // Добавляем или удаляем класс 'animated' для каждого пункта с задержкой
+                navItems.forEach((item, index) => {
+                    if (navLinks.classList.contains('nav-links--open')) {
+                        // Если меню открывается, добавляем класс с задержкой
+                        item.style.animationDelay = `${index * 0.1}s`; // Задержка 0.1s для каждого следующего пункта
+                        item.classList.add('animated'); // Добавляем класс для активации анимации
+                    } else {
+                        // Если меню закрывается, удаляем класс сразу
+                        item.classList.remove('animated'); // Удаляем класс анимации
+                        item.style.animationDelay = ''; // Сбрасываем задержку
+                    }
+                });
+            });
+        }
+
+
         // --- Логика модального окна регистрации ---
         const modal = document.getElementById('registration-modal');
         const registerTriggers = document.querySelectorAll('.register-trigger');
@@ -223,9 +248,5 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (e.target === modal) closeModal();
             });
         }
-    }
-    
-    // Вызываем инициализацию после загрузки страницы
-    initializeDynamicElements();
     }
 });
