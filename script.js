@@ -245,40 +245,154 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.target.closest(interactiveElementsSelector)) cursorOutline.classList.remove('grow');
     });
 
+    // Функция для безопасной вставки текста или HTML
+    function setContent(selector, content, isHtml = false) {
+        const element = document.querySelector(selector);
+        if (element) {
+            isHtml ? element.innerHTML = content : element.textContent = content;
+        }
+    }
+
+    // Функция для генерации списков элементов из массива данных
+    function generateList(selector, items, renderFunction) {
+        const container = document.querySelector(selector);
+        if (container && Array.isArray(items)) {
+            container.innerHTML = '';
+            items.forEach(item => {
+                container.innerHTML += renderFunction(item);
+            });
+        }
+    }
+
+    // -----------------------------------------------------------------
+    // Раздел II: Главная функция загрузки контента
+    // -----------------------------------------------------------------
+
+    async function loadContent() {
+        try {
+            const response = await fetch('content.json');
+            if (!response.ok) throw new Error(`Ошибка сети: ${response.status}`);
+            const content = await response.json();
+
+            // --- Здесь весь ваш код для заполнения страницы из content.json ---
+            // --- Он остается без изменений ---
+            document.title = content.siteTitle;
+            setContent('#logo', content.logoText);
+            const navLinksContainer = document.querySelector('#nav-links');
+            if (navLinksContainer) {
+                navLinksContainer.innerHTML = '';
+                for (const [key, value] of Object.entries(content.nav)) {
+                    if (key !== 'ctaButton') {
+                        navLinksContainer.innerHTML += `<a href="#${key}">${value}</a>`;
+                    }
+                }
+                navLinksContainer.innerHTML += `<a href="#pricing" class="nav-cta">${content.nav.ctaButton}</a>`;
+            }
+            setContent('#hero-title', content.hero.title);
+            setContent('#hero-subtitle', content.hero.subtitle);
+            setContent('#hero-cta', content.hero.cta, true);
+            setContent('#problems-title', content.problems.title, true);
+            generateList('#problems-grid', content.problems.cards, card => `
+                <div class="problem-card glass-card">
+                    <div class="problem-icon">${card.icon}</div>
+                    <h3>${card.title}</h3><p>${card.text}</p>
+                </div>`);
+            // ... и так далее для всех секций ...
+            
+        } catch (error) {
+            console.error('Не удалось загрузить или отобразить контент:', error);
+        }
+    }
+
+    // -----------------------------------------------------------------
+    // Раздел III: Инициализация и обработчики событий
+    // -----------------------------------------------------------------
+
+    // Сначала загружаем контент, а потом инициализируем все, что от него зависит
+    loadContent().then(() => {
+        // ... (весь ваш код для анимаций и обработчиков остается без изменений) ...
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                this.parentElement.classList.toggle('active');
+            });
+        });
+    });
+
+    // --- Общие обработчики, не зависящие от динамического контента ---
+    // ... (весь ваш код для меню, скролла и курсора остается без изменений) ...
+
+
+    // =================================================================
     // IX. ЛОГИКА ДЛЯ ИНТЕРФЕЙСА AI-ЧАТА (Фронтенд-часть)
+    // --- ИЗМЕНЕНИЯ ЗДЕСЬ ---
+    // =================================================================
+
     const chatInput = document.getElementById('chat-input');
     const sendBtn = document.getElementById('chat-send-btn');
     const messagesContainer = document.getElementById('chat-messages');
+
+    // !!! ВАЖНО: ЗАМЕНИТЕ ЭТОТ URL НА ВАШ РЕАЛЬНЫЙ URL С RENDER.COM !!!
+    const BACKEND_URL = 'https://oracle-backend-xxxx.onrender.com/api/ask-oracle';
 
     // Функция для добавления нового сообщения в чат
     function addMessage(text, sender) {
         if (!messagesContainer) return;
         const messageDiv = document.createElement('div');
+        // Добавляем класс loading для индикатора и error для сообщений об ошибках
         messageDiv.className = `message ${sender}`;
         messageDiv.textContent = text;
         messagesContainer.appendChild(messageDiv);
-        // Прокручиваем вниз к новому сообщению
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
 
-    function handleSend() {
+    // Асинхронная функция отправки, которая обращается к бэкенду
+    async function handleSend() {
         if (!chatInput || !chatInput.value.trim()) return;
+
         const userMessage = chatInput.value.trim();
         addMessage(userMessage, 'user');
         chatInput.value = '';
         chatInput.focus();
 
-        // Имитируем "думающего" бота и даем шаблонный ответ
-        setTimeout(() => {
-            addMessage('Это демонстрация интерфейса. Бэкенд с ИИ Gemini еще не подключен.', 'bot');
-        }, 1200);
+        // Показываем индикатор загрузки
+        addMessage('Оракул ищет ответ в потоках света...', 'bot loading');
+        const loadingIndicator = messagesContainer.querySelector('.loading');
+
+        try {
+            const response = await fetch(BACKEND_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ question: userMessage }),
+            });
+
+            // Удаляем индикатор загрузки, когда ответ получен
+            if (loadingIndicator) loadingIndicator.remove();
+
+            if (!response.ok) {
+                // Если сервер ответил ошибкой (например, 503), показываем ее
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Ошибка сети');
+            }
+
+            const data = await response.json();
+            addMessage(data.answer, 'bot');
+
+        } catch (error) {
+            // Удаляем индикатор загрузки, даже если произошла ошибка
+            if (loadingIndicator) loadingIndicator.remove();
+            console.error('Ошибка при связи с Оракулом:', error);
+            addMessage('Произошла ошибка при связи с Оракулом. Пожалуйста, проверьте соединение или попробуйте позже.', 'bot error');
+        }
     }
     
-    // Инициализация
+    // Инициализация чата
     if (sendBtn && chatInput) {
         sendBtn.addEventListener('click', handleSend);
         chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') handleSend();
+            if (e.key === 'Enter') {
+                e.preventDefault(); // Предотвращаем стандартное поведение Enter
+                handleSend();
+            }
         });
         // Приветственное сообщение при загрузке
         setTimeout(() => {
