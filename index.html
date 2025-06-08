@@ -145,6 +145,7 @@
             
             <div class="form-container">
                 <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" netlify>
+                    <input type="hidden" name="netlify-redirect" value="https://web.tribute.tg/s/vFt" />
                     <p class="hidden">
                       <label>Не заполнять: <input name="bot-field" /></label>
                     </p>
@@ -163,8 +164,8 @@
                         <input type="email" id="userEmail" name="Email" required>
                     </div>
                     <div class="form-group">
-                        <label for="userPhone">Ваш телефон:</label>
-                        <input type="tel" id="userPhone" name="Телефон">
+                        <label for="userPhone">Ваш телеграм (username):</label>
+                        <input type="text" id="telegramUserName" name="Телеграм">
                     </div>
                     
                     <button type="submit" class="cta-button">Записаться</button>
