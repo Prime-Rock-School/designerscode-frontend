@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title> 
+    <title>Prime Rock Academy - Интенсив «Код Дизайнера»</title> 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -14,8 +14,13 @@
     <nav class="nav" id="navbar">
         <div class="container">
             <div class="nav-content">
-                <a href="#" id="logo" class="logo"></a>
-                <div class="nav-links" id="nav-links"></div>
+                <a href="#" id="logo" class="logo">Prime Rock</a>
+                <div class="nav-links" id="nav-links">
+                    <a href="#hero">Главная</a>
+                    <a href="#process">Программа</a>
+                    <a href="#author">Наставник</a>
+                    <a href="#pricing">Тарифы</a>
+                </div>
                 <button class="burger-menu" id="burgerMenu" aria-label="Открыть меню">
                     <span class="material-symbols-outlined">menu</span>
                 </button>
@@ -26,9 +31,9 @@
     <header class="hero" id="hero">
         <div class="container hero-grid">
             <div class="hero-content">
-                <h1 id="hero-title"></h1>
-                <p id="hero-subtitle"></p>
-                <a href="#pricing" id="hero-cta" class="cta-button register-trigger"></a>
+                <h1 id="hero-title">Код Дизайнера: Ваш Первый Прототип за 2 Недели</h1>
+                <p id="hero-subtitle">Пройдите интенсивный спринт по UI/UX дизайну. Превратите страх чистого листа в готовый интерактивный проект для вашего портфолио — «Журнал Связи Следопыта».</p>
+                <a href="#pricing" id="hero-cta" class="cta-button register-trigger">Начать обучение</a>
             </div>
             <div class="hero-image-container">
                 <img src="/img/hero-image.png" alt="Hero Image" class="hero-image">
@@ -39,9 +44,24 @@
     <main>
         <section class="problems" id="problems">
             <div class="container">
-                <h2 id="problems-title"></h2>
+                <h2 id="problems-title">С этими проблемами сталкиваются 9 из 10 новичков</h2>
                 <div class="problems-grid" id="problems-grid">
+                    <div class="problem-card" data-aos="fade-up" data-aos-delay="0ms">
+                        <span class="icon material-symbols-outlined">smart_display</span>
+                        <h3>Бесконечные туториалы</h3>
+                        <p>Вы смотрите десятки роликов, но знания не складываются в систему. В итоге — хаос в голове и ноль работ в портфолио.</p>
                     </div>
+                    <div class="problem-card" data-aos="fade-up" data-aos-delay="100ms">
+                        <span class="icon material-symbols-outlined">palette</span>
+                        <h3>Страх чистого листа</h3>
+                        <p>Вы часами двигаете пиксели, пытаясь создать что-то свое, но без четкого плана и уверенности в инструментах.</p>
+                    </div>
+                    <div class="problem-card" data-aos="fade-up" data-aos-delay="200ms">
+                        <span class="icon material-symbols-outlined">psychology</span>
+                        <h3>Синдром самозванца</h3>
+                        <p>Вы сравниваете свои попытки с работами профессионалов и кажется, что до их уровня — световые годы. Мотивация падает.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -49,9 +69,31 @@
             <div class="container">
                 <div class="solution-content">
                     <div class="solution-text">
-                        <h2 id="solution-title" style="text-align: left;"></h2>
-                        <p id="solution-text-p"></p>
-                        <div class="solution-features" id="solution-features"></div>
+                        <h2 id="solution-title" style="text-align: left;">Мы даем не знания, а маршрут к результату</h2>
+                        <p id="solution-text-p">Наш двухнедельный интенсив — это проверенный путь через болота сомнений. Мы экономим вам месяцы времени, давая четкую систему «делай раз, делай два, делай три» и поддержку наставника на живых воркшопах.</p>
+                        <div class="solution-features" id="solution-features">
+                            <div class="feature-item" data-aos="fade-in-left" data-aos-delay="0ms">
+                                <span class="icon material-symbols-outlined">workspace_premium</span>
+                                <div>
+                                    <h4>Гарантированный результат</h4>
+                                    <p>Вы закончите курс с готовым интерактивным прототипом для портфолио.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item" data-aos="fade-in-left" data-aos-delay="100ms">
+                                <span class="icon material-symbols-outlined">groups</span>
+                                <div>
+                                    <h4>Живые воркшопы</h4>
+                                    <p>Вы работаете бок о бок с наставником, получая мгновенную обратную связь.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item" data-aos="fade-in-left" data-aos-delay="200ms">
+                                <span class="icon material-symbols-outlined">design_services</span>
+                                <div>
+                                    <h4>Фокус на практике</h4>
+                                    <p>80% времени вы проводите в Figma, создавая реальный проект «Журнал Связи Следопыта».</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="solution-image">
                         <img src="img/solution-img.png" alt="Solution Image">
@@ -62,9 +104,24 @@
         
         <section class="process" id="process">
             <div class="container">
-                <h2 id="process-title"></h2>
+                <h2 id="process-title">Ваш путь за 2 недели: от рекрута до следопыта</h2>
                 <div class="process-steps" id="process-steps">
+                    <div class="process-step" data-aos="fade-up" data-aos-delay="0ms">
+                        <div class="step-id">01</div>
+                        <h3>Неделя 1: Основы Figma и UI</h3>
+                        <p>Изучаем интерфейс, сетки, стили и компоненты. Создаем первые статичные экраны вашего проекта, обретая уверенность в инструменте.</p>
                     </div>
+                    <div class="process-step" data-aos="fade-up" data-aos-delay="100ms">
+                        <div class="step-id">02</div>
+                        <h3>Неделя 2: UX и Интерактивный Прототип</h3>
+                        <p>Оживляем дизайн. Изучаем пользовательские сценарии и превращаем статичные макеты в кликабельный прототип с анимациями.</p>
+                    </div>
+                    <div class="process-step" data-aos="fade-up" data-aos-delay="200ms">
+                        <div class="step-id">03</div>
+                        <h3>Финал: Готовый проект</h3>
+                        <p>Вы завершаете работу над «Журналом Связи Следопыта» и получаете сильный, концептуальный проект для своего портфолио.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -74,47 +131,133 @@
                     <img id="author-image-src" src="img/author-img.png" alt="Фото автора курса">
                 </div>
                 <div class="author-text">
-                    <h2 id="author-title" style="text-align: left;"></h2>
-                    <h3 id="author-name"></h3>
-                    <p id="author-bio"></p>
+                    <h2 id="author-title" style="text-align: left;">Ваш Наставник на этом пути</h2>
+                    <h3 id="author-name">Имя Фамилия</h3>
+                    <p id="author-bio">Основатель Prime Rock Academy, практикующий дизайнер с многолетним опытом. Провел десятки студентов от полного нуля до первых заказов. Моя цель — дать вам самый прямой и эффективный путь в профессию, без 'воды' и лишней теории. Я верю, что лучший способ научиться — это делать, и я буду делать это вместе с вами на живых воркшопах.</p>
                 </div>
             </div>
         </section>
 
         <section class="testimonials" id="testimonials">
             <div class="container">
-                <h2 id="testimonials-title"></h2>
+                <h2 id="testimonials-title">Отзывы выпускников</h2>
                 <div class="testimonials-grid" id="testimonials-grid">
+                    <div class="testimonial-card">
+                        <p>"Это было лучшее вложение в мое развитие. Четкая структура, никакой 'воды', только практика. За короткий срок я сделал то, на что не мог решиться полгода."</p>
+                        <div class="testimonial-author-info">
+                            <img src="https://placehold.co/100x100/F5F5F5/000000?text=A" alt="Фото Анна">
+                            <div>
+                                <div class="testimonial-author-name">Анна</div>
+                                <span>Выпускница PrimeCamp</span>
+                            </div>
+                        </div>
                     </div>
+                    <div class="testimonial-card">
+                        <p>"Поддержка наставника и энергия группы — это то, что не дало сдаться. Я не просто научился работать в Figma, я поверил в свои силы."</p>
+                        <div class="testimonial-author-info">
+                            <img src="https://placehold.co/100x100/000000/FFFFFF?text=M" alt="Фото Марк">
+                            <div>
+                                <div class="testimonial-author-name">Марк</div>
+                                <span>Выпускник PrimeCamp</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section class="pricing" id="pricing">
             <div class="container">
-                <h2 id="pricing-title"></h2>
-                <div class="pricing-grid" id="pricing-grid"></div>
+                <h2 id="pricing-title">Выберите свой путь в отряде</h2>
+                <div class="pricing-grid" id="pricing-grid">
+                    <div class="pricing-plan" data-aos="fade-scale-up" data-aos-delay="0ms">
+                        <h3 class="plan-name">Следопыт</h3>
+                        <div class="plan-price">$115</div>
+                        <ul class="plan-features">
+                            <li><span class="material-symbols-outlined">check</span>4 живые сессии (лекции + воркшопы)</li>
+                            <li><span class="material-symbols-outlined">check</span>Полный доступ ко всем материалам</li>
+                            <li><span class="material-symbols-outlined">check</span>Доступ в общий чат в Discord</li>
+                            <li><span class="material-symbols-outlined">check</span>Общая обратная связь на сессиях</li>
+                            <li><span class="material-symbols-outlined">check</span>Сертификат об окончании</li>
+                        </ul>
+                        <a href="#" class="cta-button register-trigger">Выбрать Следопыта</a>
+                    </div>
+                    <div class="pricing-plan popular" data-aos="fade-scale-up" data-aos-delay="100ms">
+                        <h3 class="plan-name">Авангард</h3>
+                        <div class="plan-price">$195</div>
+                        <ul class="plan-features">
+                            <li><span class="material-symbols-outlined">check</span>Всё из тарифа «Следопыт»</li>
+                            <li><span class="material-symbols-outlined">check</span>2 персональные видео-проверки ДЗ</li>
+                            <li><span class="material-symbols-outlined">check</span>Разбор UI макетов от наставника</li>
+                            <li><span class="material-symbols-outlined">check</span>Разбор финального UX прототипа</li>
+                            <li><span class="material-symbols-outlined">check</span>Приоритетная поддержка в чате</li>
+                        </ul>
+                        <a href="#" class="cta-button register-trigger">Выбрать Авангард</a>
+                    </div>
+                    <div class="pricing-plan" data-aos="fade-scale-up" data-aos-delay="200ms">
+                        <h3 class="plan-name">Протеже Наставника</h3>
+                        <div class="plan-price">$345</div>
+                        <ul class="plan-features">
+                            <li><span class="material-symbols-outlined">check</span>Всё из тарифа «Авангард»</li>
+                            <li><span class="material-symbols-outlined">check</span>Персональная сессия (45 мин)</li>
+                            <li><span class="material-symbols-outlined">check</span>Разбор карьерного пути в UI/UX</li>
+                            <li><span class="material-symbols-outlined">check</span>Рекомендации по портфолио</li>
+                            <li><span class="material-symbols-outlined">check</span>VIP-статус в сообществе</li>
+                        </ul>
+                        <a href="#" class="cta-button register-trigger">Стать Протеже</a>
+                    </div>
+                </div>
             </div>
         </section>
         
         <section class="faq" id="faq-section">
             <div class="container">
-                <h2 id="faq-title"></h2>
-                <div class="faq-container" id="faq-container"></div>
+                <h2 id="faq-title">Часто задаваемые вопросы</h2>
+                <div class="faq-container" id="faq-container">
+                    <div class="faq-item" data-aos="fade-up">
+                        <button class="faq-question">
+                            <span>Подойдет ли интенсив для полных новичков?</span>
+                            <span class="faq-arrow material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="faq-answer"><p>Абсолютно! Интенсив построен так, что вы освоите всё с нуля. Мы начинаем с самых основ Figma и постепенно доходим до создания полноценного прототипа.</p></div>
+                    </div>
+                    <div class="faq-item" data-aos="fade-up">
+                        <button class="faq-question">
+                            <span>Сколько времени нужно уделять обучению?</span>
+                            <span class="faq-arrow material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="faq-answer"><p>Интенсив рассчитан на 2 недели. Мы рекомендуем закладывать 1-2 часа в день на просмотр уроков и практику, плюс время на участие в живых сессиях дважды в неделю.</p></div>
+                    </div>
+                    <div class="faq-item" data-aos="fade-up">
+                        <button class="faq-question">
+                            <span>Нужно ли покупать Figma или другое ПО?</span>
+                            <span class="faq-arrow material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="faq-answer"><p>Нет! Мы работаем в Figma, у которой есть щедрый бесплатный тариф. Его более чем достаточно для прохождения курса и дальнейшей работы.</p></div>
+                    </div>
+                    <div class="faq-item" data-aos="fade-up">
+                        <button class="faq-question">
+                            <span>Что если я пропущу живую сессию?</span>
+                            <span class="faq-arrow material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="faq-answer"><p>Все живые сессии записываются. Вы сможете посмотреть запись в удобное для вас время в нашем закрытом канале.</p></div>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section class="final-cta" id="final-cta">
              <div class="container final-cta-content">
-                <h2 id="final-cta-title"></h2>
-                <p id="final-cta-subtitle"></p>
-                <a href="#pricing" id="final-cta-button" class="cta-button register-trigger"></a>
+                <h2 id="final-cta-title">Ваше место в отряде ждет вас</h2>
+                <p id="final-cta-subtitle">Хватит сомневаться. Пора действовать. Записывайтесь на интенсив и создайте свой первый проект, который не стыдно показать!</p>
+                <a href="#pricing" id="final-cta-button" class="cta-button register-trigger">Записаться на курс</a>
             </div>
         </section>
     </main>
 
     <footer id="footer">
         <div class="container">
-            <p id="footer-text"></p>
+            <p id="footer-text">© 2025 Prime Rock. Все права защищены.</p>
         </div>
     </footer>
 

@@ -1,251 +1,231 @@
 // =================================================================
-// SCRIPT.JS - «ЧИСТАЯ АРХИТЕКТУРА» ЦИТАДЕЛИ АКАДЕМИИ v3.0
+// SCRIPT.JS - «ЧИСТАЯ АРХИТЕКТУРА» ЦИТАДЕЛИ АКАДЕМИИ v6.0 (СТАТИКА)
 // =================================================================
 
 document.addEventListener('DOMContentLoaded', function() {
 
-    const TELEGRAM_REDIRECT_URL = 'https://web.tribute.tg/s/vFt';
-
     // -----------------------------------------------------------------
-    // Раздел I: Вспомогательные функции
+    // Раздел I: Функции инициализации интерактивных элементов
     // -----------------------------------------------------------------
 
-    function setContent(selector, content, isHtml = false) {
-        const element = document.querySelector(selector);
-        if (element) {
-            isHtml ? element.innerHTML = content : element.textContent = content;
-        }
-    }
-
-    function generateList(selector, items, renderFunction) {
-        const container = document.querySelector(selector);
-        if (container && Array.isArray(items)) {
-            container.innerHTML = items.map(renderFunction).join('');
-        }
-    }
-
-    // -----------------------------------------------------------------
-    // Раздел II: Загрузка и рендер основного контента
-    // -----------------------------------------------------------------
-
-    function populateContent(data) {
-        document.title = data.siteTitle;
-        setContent('#logo', data.logoText);
-
-        const navLinksContainer = document.getElementById('nav-links');
-        if (navLinksContainer) {
-            navLinksContainer.innerHTML = `
-                <a href="#hero">${data.nav.home}</a>
-                <a href="#process">${data.nav.process}</a>
-                <a href="#author">${data.nav.author}</a>
-                <a href="#pricing">${data.nav.pricing}</a>
-            `;
-        }
-
-        setContent('#hero-title', data.hero.title, true);
-        setContent('#hero-subtitle', data.hero.subtitle, true);
-        setContent('#hero-cta', data.hero.cta, true);
-
-        // Рендер карточек с проблемами, используя иконки из JSON
-        setContent('#problems-title', data.problems.title, true);
-        generateList('#problems-grid', data.problems.cards, card => `
-            <div class="problem-card">
-                <span class="icon material-symbols-outlined">${card.icon}</span>
-                <h3>${card.title}</h3>
-                <p>${card.text}</p>
-            </div>
-        `);
-
-        // Рендер преимуществ с иконками из JSON
-        setContent('#solution-title', data.solution.title, true);
-        setContent('#solution-text-p', data.solution.text);
-        generateList('#solution-features', data.solution.features, feature => `
-            <div class="feature-item">
-                <span class="icon material-symbols-outlined">${feature.icon}</span>
-                <div>
-                    <h4>${feature.title}</h4>
-                    <p>${feature.text}</p>
-                </div>
-            </div>
-        `);
+    /**
+     * Инициализирует анимации появления элементов при прокрутке.
+     * Использует IntersectionObserver для отслеживания видимости элементов.
+     */
+    function initializeAnimations() {
+        // Выбираем все элементы с атрибутом data-aos для анимации
+        const animatedElements = document.querySelectorAll('[data-aos]');
         
-        setContent('#process-title', data.process.title, true);
-        generateList('#process-steps', data.process.steps, step => `
-            <div class="process-step">
-                <div class="step-id">${step.id}</div>
-                <h3>${step.title}</h3>
-                <p>${step.text}</p>
-            </div>
-        `);
-
-        setContent('#author-title', data.author.title);
-        setContent('#author-name', data.author.name);
-        setContent('#author-bio', data.author.bio);
-
-        setContent('#testimonials-title', data.testimonials.title, true);
-        generateList('#testimonials-grid', data.testimonials.reviews, review => `
-            <div class="testimonial-card">
-                <p>"${review.text}"</p>
-                <div class="testimonial-author-info">
-                    <img src="${review.image}" alt="Фото ${review.author}">
-                    <div>
-                        <div class="testimonial-author-name">${review.author}</div>
-                        <span>${review.info}</span>
-                    </div>
-                </div>
-            </div>
-        `);
-
-        // Рендер тарифов с иконкой "check"
-        setContent('#pricing-title', data.pricing.title, true);
-        generateList('#pricing-grid', data.pricing.plans, plan => `
-            <div class="pricing-plan ${plan.isPopular ? 'popular' : ''}">
-                <h3 class="plan-name">${plan.name}</h3>
-                <div class="plan-price">${plan.price}</div>
-                <ul class="plan-features">
-                    ${plan.features.map(f => `<li><span class="material-symbols-outlined">check</span>${f}</li>`).join('')}
-                </ul>
-                <a href="#" class="cta-button register-trigger">${plan.cta}</a>
-            </div>
-        `);
-        
-        setContent('#faq-title', data.faq.title, true);
-        generateList('#faq-container', data.faq.items, item => `
-            <div class="faq-item">
-                <button class="faq-question">
-                    <span>${item.question}</span>
-                    <span class="faq-arrow material-symbols-outlined">expand_more</span>
-                </button>
-                <div class="faq-answer">
-                    <p>${item.answer}</p>
-                </div>
-            </div>
-        `);
-        
-        setContent('#final-cta-title', data.final_cta.title, true);
-        setContent('#final-cta-subtitle', data.final_cta.subtitle);
-        setContent('#final-cta-button', data.final_cta.cta, true);
-        
-        setContent('#footer-text', `© ${new Date().getFullYear()} ${data.logoText}. Все права защищены.`);
-
-        initializeDynamicElements(); // <-- ЭТОТ ВЫЗОВ ОСТАВЛЯЕМ
-    }
-
-    fetch('content.json')
-        .then(response => response.json())
-        .then(data => populateContent(data))
-        .catch(error => console.error('Ошибка загрузки контента:', error));
-
-    // -----------------------------------------------------------------
-    // Раздел III: Динамические элементы и UX
-    // -----------------------------------------------------------------
-
-    function initializeDynamicElements() {
-        // --- Логика FAQ ---
-        document.querySelectorAll('.faq-question').forEach(button => {
-            button.addEventListener('click', () => {
-                const item = button.parentElement;
-                item.classList.toggle('active');
-                const answer = item.querySelector('.faq-answer');
-                if (item.classList.contains('active')) {
-                    answer.style.maxHeight = answer.scrollHeight + 'px';
-                } else {
-                    answer.style.maxHeight = '0';
-                }
-            });
-        });
-
-        // --- Логика чата "Роки" ---
-        const rockyChat = document.getElementById('rocky-chat');
-        const toggleBtn = document.getElementById('rocky-chat-toggle');
-        const chatForm = document.getElementById('chat-form');
-        const chatInput = document.getElementById('chat-input');
-        const messagesContainer = document.getElementById('chat-messages');
-
-        toggleBtn.addEventListener('click', () => {
-            rockyChat.classList.toggle('chat--open');
-        });
-
-        function addMessage(text, type) {
-            const msgDiv = document.createElement('div');
-            msgDiv.className = `chat-message ${type}-message`;
-            msgDiv.innerHTML = `<p>${text}</p>`;
-            messagesContainer.appendChild(msgDiv);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        async function handleSend(e) {
-            e.preventDefault();
-            const userMessage = chatInput.value.trim();
-            if (!userMessage) return;
-            addMessage(userMessage, 'user');
-            chatInput.value = '';
-            
-            addMessage('Анализирую ваш вопрос...', 'bot loading');
-            setTimeout(() => {
-                const loading = messagesContainer.querySelector('.loading-message');
-                if (loading) loading.remove();
-                addMessage('К сожалению, мой нейронный контур сейчас на перезагрузке. Попробуйте спросить позже!', 'bot error');
-            }, 2000);
-        }
-
-        chatForm.addEventListener('submit', handleSend);
-        setTimeout(() => addMessage('Здравствуйте! Я — Роки. Чем могу помочь?', 'bot'), 1000);
-
-        // --- Логика бургерного меню ---
-        const burgerMenuButton = document.getElementById('burgerMenu');
-        const navLinks = document.getElementById('nav-links');
-        const navBar = document.getElementById('navbar'); // Получаем основной навигационный блок
-        const navItems = navLinks.querySelectorAll('a'); // Получаем все ссылки внутри меню
-
-        if (burgerMenuButton && navLinks && navBar) {
-            burgerMenuButton.addEventListener('click', () => {
-                navLinks.classList.toggle('nav-links--open'); // Переключаем класс для показа/скрытия контейнера ссылок
-                navBar.classList.toggle('nav--open'); // Переключаем класс для изменения стилей навигации (например, для фона)
-
-                // Добавляем или удаляем класс 'animated' для каждого пункта с задержкой
-                navItems.forEach((item, index) => {
-                    if (navLinks.classList.contains('nav-links--open')) {
-                        // Если меню открывается, добавляем класс с задержкой
-                        item.style.animationDelay = `${index * 0.1}s`; // Задержка 0.1s для каждого следующего пункта
-                        item.classList.add('animated'); // Добавляем класс для активации анимации
-                    } else {
-                        // Если меню закрывается, удаляем класс сразу
-                        item.classList.remove('animated'); // Удаляем класс анимации
-                        item.style.animationDelay = ''; // Сбрасываем задержку
+        // Проверяем, поддерживает ли браузер IntersectionObserver
+        if ("IntersectionObserver" in window) {
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    // Если элемент появляется в области видимости
+                    if (entry.isIntersecting) {
+                        // Применяем задержку анимации из data-атрибута
+                        const delay = entry.target.dataset.aosDelay || '0';
+                        entry.target.style.animationDelay = delay;
+                        
+                        // Добавляем класс для запуска анимации (определенной в CSS)
+                        entry.target.classList.add('animate-in');
+                        
+                        // Прекращаем наблюдение за элементом после одной анимации
+                        observer.unobserve(entry.target);
                     }
                 });
+            }, { threshold: 0.1 }); // Анимация сработает, когда 10% элемента видно
+            
+            // Начинаем наблюдение за каждым элементом
+            animatedElements.forEach(el => observer.observe(el));
+        }
+    }
+
+    /**
+     * Инициализирует всю динамику на странице: меню, FAQ, модальные окна, чат.
+     */
+    function initializeDynamicElements() {
+        // --- Логика бургер-меню ---
+        const burgerMenuButton = document.getElementById('burgerMenu');
+        const navBar = document.getElementById('navbar');
+        if (burgerMenuButton && navBar) {
+            burgerMenuButton.addEventListener('click', () => {
+                navBar.classList.toggle('nav--open');
             });
         }
 
+        // --- Логика FAQ ---
+        const faqContainer = document.querySelector('#faq-container');
+        if (faqContainer) {
+            faqContainer.addEventListener('click', (e) => {
+                const questionButton = e.target.closest('.faq-question');
+                if (questionButton) {
+                    // Переключаем класс 'active' на родительском элементе .faq-item
+                    questionButton.parentElement.classList.toggle('active');
+                }
+            });
+        }
+
+        // --- Функция для управления видимостью кнопки чата ---
+        function toggleChatButtonVisibility(hide = false) {
+            const chatButton = document.querySelector('.rocky-chat-button');
+            if (chatButton) {
+                if (hide) {
+                    chatButton.classList.add('hidden');
+                } else {
+                    chatButton.classList.remove('hidden');
+                }
+            }
+        }
 
         // --- Логика модального окна регистрации ---
         const modal = document.getElementById('registration-modal');
-        const registerTriggers = document.querySelectorAll('.register-trigger');
         const closeModalBtn = document.getElementById('modal-close-btn');
-
-        function openModal() {
-            if (modal) modal.classList.add('modal--open');
-        }
-
-        function closeModal() {
-            if (modal) modal.classList.remove('modal--open');
-        }
-
-        registerTriggers.forEach(btn => btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            openModal();
-        }));
         
-        if(closeModalBtn) {
-            closeModalBtn.addEventListener('click', closeModal);
-        }
+        // Открытие модального окна по клику на любую кнопку с классом .register-trigger
+        document.body.addEventListener('click', (e) => {
+            if (e.target.matches('.register-trigger')) {
+                e.preventDefault();
+                modal?.classList.add('modal--open');
+                // Скрываем кнопку чата при открытии модального окна
+                toggleChatButtonVisibility(true);
+            }
+        });
         
-        if(modal) {
-            modal.addEventListener('click', (e) => {
-                // Закрывать модальное окно только если клик был вне modal-content
-                if (e.target === modal) closeModal(); 
+        // Закрытие модального окна через кнопку "крестик"
+        closeModalBtn?.addEventListener('click', () => {
+            modal?.classList.remove('modal--open');
+            // Показываем кнопку чата при закрытии модального окна
+            toggleChatButtonVisibility(false);
+        });
+        
+        // Закрытие модального окна по клику на фон
+        modal?.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('modal--open');
+                // Показываем кнопку чата при закрытии модального окна
+                toggleChatButtonVisibility(false);
+            }
+        });
+        
+        // --- Логика чата "Роки" ---
+        const chatContainer = document.getElementById('rocky-chat');
+        if (chatContainer) {
+            const chatToggleBtn = document.getElementById('rocky-chat-toggle');
+            const chatForm = document.getElementById('chat-form');
+            const chatMessages = document.getElementById('chat-messages');
+            const chatInput = document.getElementById('chat-input');
+            const API_ENDPOINT = 'https://designerscode-oracle-backend.onrender.com/api/ask-oracle';
+
+            const addMessage = (text, sender) => {
+                const loading = chatMessages.querySelector('.loading-indicator');
+                if (loading) loading.remove();
+                
+                const msgContainer = document.createElement('div');
+                msgContainer.className = `chat-message ${sender === 'user' ? 'user-message' : 'bot-message'}`;
+                const p = document.createElement('p');
+                p.textContent = text;
+                msgContainer.appendChild(p);
+                chatMessages.appendChild(msgContainer);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            };
+
+            const showLoadingIndicator = () => {
+                const loadingContainer = document.createElement('div');
+                loadingContainer.className = 'chat-message bot-message loading-indicator';
+                loadingContainer.innerHTML = `<div class="loader-animation"><span></span><span></span><span></span><span></span></div><p>Ищу ответы в библиотеке Премудрости...</p>`;
+                const existingLoading = chatMessages.querySelector('.loading-indicator');
+                if (existingLoading) existingLoading.remove();
+                chatMessages.appendChild(loadingContainer);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            };
+
+            const isMobile = () => window.innerWidth <= 768;
+
+            chatToggleBtn.addEventListener('click', () => {
+                const isOpening = !chatContainer.classList.contains('chat--open');
+                
+                if (isOpening) {
+                    chatContainer.classList.add('chat--open');
+                    if (isMobile()) {
+                        requestAnimationFrame(() => chatContainer.classList.add('show'));
+                        document.body.style.overflow = 'hidden';
+                    }
+                    if (!sessionStorage.getItem('rockyWelcomeShown')) {
+                        setTimeout(() => {
+                            addMessage('Здравствуйте! Я Роки, ваш проводник. Спросите меня о курсе, тарифах или программе, и я найду ответ в Библиотеке Премудрости.', 'bot');
+                            sessionStorage.setItem('rockyWelcomeShown', 'true');
+                        }, isMobile() ? 800 : 500);
+                    }
+                } else {
+                    if (isMobile()) {
+                        chatContainer.classList.remove('show');
+                        document.body.style.overflow = '';
+                        setTimeout(() => chatContainer.classList.remove('chat--open'), 400);
+                    } else {
+                        chatContainer.classList.remove('chat--open');
+                    }
+                }
+            });
+
+            chatContainer.addEventListener('click', (e) => {
+                if (e.target === chatContainer && isMobile()) {
+                    chatContainer.classList.remove('show');
+                    document.body.style.overflow = '';
+                    setTimeout(() => chatContainer.classList.remove('chat--open'), 400);
+                }
+            });
+
+            chatForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const userMessage = chatInput.value.trim();
+                if (!userMessage) return;
+
+                addMessage(userMessage, 'user');
+                chatInput.value = '';
+                showLoadingIndicator();
+
+                try {
+                    const response = await fetch(API_ENDPOINT, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ question: userMessage }),
+                    });
+                    if (!response.ok) throw new Error(`Сетевая ошибка: ${response.status}`);
+                    const data = await response.json();
+                    setTimeout(() => addMessage(data.answer || 'Не удалось получить ответ.', 'bot'), 1200);
+                } catch (error) {
+                    console.error('Rocky: Ошибка связи с ИИ-ассистентом:', error);
+                    setTimeout(() => addMessage('Произошла ошибка. Пожалуйста, попробуйте еще раз позже.', 'bot'), 1200);
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && chatContainer.classList.contains('chat--open')) {
+                    if (isMobile()) {
+                        chatContainer.classList.remove('show');
+                        document.body.style.overflow = '';
+                        setTimeout(() => chatContainer.classList.remove('chat--open'), 400);
+                    } else {
+                        chatContainer.classList.remove('chat--open');
+                    }
+                }
+            });
+
+            document.querySelector('.rocky-chat-window')?.addEventListener('click', (e) => {
+                e.stopPropagation();
             });
         }
     }
+
+    // -----------------------------------------------------------------
+    // Раздел II: Главная точка входа
+    // -----------------------------------------------------------------
+    
+    // 1. Инициализируем всю динамику (меню, модалки, чат и т.д.)
+    initializeDynamicElements();
+    
+    // 2. Инициализируем анимации появления для уже существующих в HTML элементов
+    initializeAnimations();
+
+    console.log("Rocky: Архитектура выстроена. Все статические и динамические системы запущены.");
 });
